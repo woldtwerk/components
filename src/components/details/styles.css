@@ -1,9 +1,4 @@
 @layer woldtwerk {
-  html {
-    font-family: sans-serif;
-    color: hsl(0 0% 7%);
-  }
-
   details-group {
     display: grid;
     gap: 0.5em;
@@ -15,7 +10,7 @@
     summary {
       padding: 0.5em 1em;
       border-radius: 0.5em;
-      background-color: hsl(0 0% 93%);
+      background-color: var(--base-bg);
       font-weight: 500;
       user-select: none;
       cursor: pointer;

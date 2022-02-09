@@ -1,0 +1,11 @@
+@layer woldtwerk {
+  html {
+    font-family: sans-serif;
+    color: var(--base-content);
+  }
+  
+  :root {
+    --base-bg: hsl(0 0% 93%);
+    --base-content:  hsl(0 0% 7%);
+  }
+}
