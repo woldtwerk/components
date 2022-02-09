@@ -1,0 +1,54 @@
+@layer woldtwerk {
+  html {
+    font-family: sans-serif;
+    color: hsl(0 0% 7%);
+  }
+
+  details-group {
+    display: grid;
+    gap: 0.5em;
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    summary {
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      background-color: hsl(0 0% 93%);
+      font-weight: 500;
+      user-select: none;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+
+      &::after {
+        content: '';
+        background-color: currentColor;
+        mask-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>');
+        mask-size: 100% 100%;
+        background-repeat: no-repeat;
+        height: 1em;
+        flex: 0 0 1em;
+      }
+    }
+
+    summary ~ * {
+      margin: 0;
+      padding: 0.5em 1em;
+    }
+
+  }
+}
+
+/**
+// #fbfe7b gelb
+// #101010 schwarz
+// #eee grey
+**/
+
+/* <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--mdi" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6l1.41-1.42z" fill="currentColor"></path></svg> */
+
+/* 
+<svg viewBox="0 0 24 24"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z" fill="currentColor"/></svg> */
