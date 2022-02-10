@@ -27,10 +27,6 @@
       --o-bg: 1;
       box-shadow: var(--chkbs) 0 0 2px hsl(var(--chkbg)) inset,
         0 0 0 2px hsl(var(--chkbg)) inset, var(--focus-shadow);
-      [dir='rtl'] & {
-        box-shadow: calc(var(--chkbs) * 1) 0 0 2px hsl(var(--chkbg)) inset,
-          0 0 0 2px hsl(var(--chkbg)) inset, var(--focus-shadow);
-      }
     }
 
     &:disabled {
