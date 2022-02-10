@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "@vitejs/plugin-vue": "^2.2.0",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
+    "color": "^4.2.0",
     "postcss-nested": "^5.0.6",
     "storybook-builder-vite": "^0.1.15",
     "typescript": "^4.5.4",

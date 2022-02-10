@@ -10,7 +10,7 @@
     summary {
       padding: 0.5em 1em;
       border-radius: 0.5em;
-      background-color: var(--base-bg);
+      background-color: hsla(var(--b2) / var(--o-bg,1));
       font-weight: 500;
       user-select: none;
       cursor: pointer;
@@ -36,14 +36,3 @@
 
   }
 }
-
-/**
-// #fbfe7b gelb
-// #101010 schwarz
-// #eee grey
-**/
-
-/* <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--mdi" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6l1.41-1.42z" fill="currentColor"></path></svg> */
-
-/* 
-<svg viewBox="0 0 24 24"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z" fill="currentColor"/></svg> */

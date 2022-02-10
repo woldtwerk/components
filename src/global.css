@@ -3,9 +3,22 @@
     font-family: sans-serif;
     color: var(--base-content);
   }
-  
+
   :root {
-    --base-bg: hsl(0 0% 93%);
-    --base-content:  hsl(0 0% 7%);
+    --b1: 0 0% 100%;
+    --b2: 0 0% 93%; /* #eeeeee */
+    --bc: 0 0% 7%; /* #101010 */
+
+    /* --p: 61 98% 74%; // #fbfe7b
+    --pf: 61 98% 64%;
+    --pc: var(--bc);
+
+    --s: 259 94% 51%;
+    --sf: 259 94% 41%;
+    --sc: var(--bc);
+    
+    --a: 174 60% 51%;
+    --af: 174 60% 41%;
+    --ac: var(--bc); */
   }
 }
