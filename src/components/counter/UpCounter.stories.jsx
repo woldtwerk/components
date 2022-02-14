@@ -32,5 +32,9 @@ export default {
 //   value: '50.000',
 // };
 
-export const Primary = () => html`<up-counter value="50000"></up-counter>`
+export const Primary = () => html`
+  <up-counter value="50000.12">
+    <span slot="prefix">$</span>
+    <span slot="suffix">B</span>
+  </up-counter>`
 

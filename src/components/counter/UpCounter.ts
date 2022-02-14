@@ -1,15 +1,19 @@
 import './styles.css'
 
 export class UpCounter extends HTMLElement {
-  get value(): string {
-    return this.getAttribute('value') || ''
+  start: number
+  decimals: number
+  shadowRoot: ShadowRoot;
+
+  get value(): number {
+    return Number(this.getAttribute('value'))
   }
 
-  set value(val: string) {
-    this.setAttribute('value', val)
+  set value(val: number) {
+    this.setAttribute('value', `${val}`)
   }
 
-  get durattion(): number {
+  get duration(): number {
     return this.hasAttribute('duration') && +(this.getAttribute('duration') || 0) || 0
   }
 
@@ -19,19 +23,25 @@ export class UpCounter extends HTMLElement {
   
   constructor() {
     super()
-    const shadowRoot = this.attachShadow({mode: 'open'})
-    const start = +new Number(0).toFixed(this.getDecimals(this.value))
-    this.animateValue(shadowRoot, start, 10.2, 3000);
+    this.shadowRoot = this.attachShadow({mode: 'open'})
+    this.start = +new Number(0).toFixed(this.getDecimals(this.value))
+    this.decimals = this.getDecimals(this.value)
+    this.render()
   }
 
   connectedCallback() {
-
+    this.animateValue(this.shadowRoot.querySelector('[part="content"]')!, this.start, this.value, 3000);
   }
 
   disconnectedCallback() {
 
   }
 
+  /**
+   * Ease animation at end.
+   * @param t 
+   * @returns 
+   */
   easeOutQuad(t: number) {
     return t * (2 - t )
   }
@@ -42,7 +52,10 @@ export class UpCounter extends HTMLElement {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = this.easeOutQuad(Math.min((timestamp - startTimestamp) / duration, 1))
       // const progress = this.easeOutQuad((timestamp - startTimestamp) / duration)
-      el.innerHTML = (progress * (end - start) + start).toFixed(2).toLocaleString()
+      el.innerHTML = (progress * (end - start) + start).toLocaleString(undefined, {
+        minimumFractionDigits: this.decimals,
+        maximumFractionDigits: this.decimals
+      })
       if (progress < 1) {
         window.requestAnimationFrame(step);
       }
@@ -55,16 +68,50 @@ export class UpCounter extends HTMLElement {
    * @param val 
    * @returns 
    */
-  getDecimals(val: string) {
-    return val.split('.').length === 2
+  getDecimals(val: number) {
+    return `${val}`.split('.').length === 2
       // @ts-expect-error
-      ? val.split('.').at(-1).length
+      ? `${val}`.split('.').at(-1).length
       : 0
   }
 
-  // getLocal() {
-  //   return navigator.languages ? navigator.languages[0] : 'en'
-  // }
+  render() {
+    const val = this.value.toLocaleString()
+    const length = val.length - (val.match(/,|\./g)!.length / 2)
+
+    this.shadowRoot.appendChild(Object.assign(document.createElement('style'), {
+      textContent: `
+        [part="wrapper"] {
+          display: inline-flex;
+          gap: 0.5ch;
+        }
+
+        [part="content"] {
+          display: inline-block;
+          min-width: ${length}ch;
+          text-align: right;
+        }
+      `
+    }))
+
+    const wrapper = Object.assign(document.createElement('div'), {
+      part: 'wrapper'
+    })
+
+    wrapper.appendChild(Object.assign(document.createElement('slot'), {
+      name: 'prefix'
+    }))
+
+    wrapper.appendChild(Object.assign(document.createElement('div'), {
+      part: 'content'
+    }))
+
+    wrapper.appendChild(Object.assign(document.createElement('slot'), {
+      name: 'suffix'
+    }))
+
+    this.shadowRoot.appendChild(wrapper)
+  }
 }
 
 window.customElements.define('up-counter', UpCounter)
