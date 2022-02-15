@@ -33,7 +33,8 @@ export default {
 // };
 
 export const Primary = () => html`
-  <up-counter value="50000.12">
+  <div style="height: 100vh;">Scroll down</div>
+  <up-counter style="font-size:3rem;" intersect value="50000.12" delay="1000">
     <span slot="prefix">$</span>
     <span slot="suffix">B</span>
   </up-counter>`
