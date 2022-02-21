@@ -1,0 +1,64 @@
+:where([id$="local-tasks"]) {
+  --icon: var(--i-feather-file-text);
+
+  border-bottom: 1px solid hsl(var(--b3));
+
+  & :where(ul) {
+    list-style: none;
+    margin: 0 0 -1px;
+    padding: 0;
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    gap: 1em;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  & a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0.25rem;
+    font-size: 0.875rem;
+    font-weight: bolder;
+    color: hsl(var(--bc));
+    user-select: none;
+
+    &:where(:not(.is-active):hover) {
+      border-bottom: 2px solid hsl(var(--bc));
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      width: 1.25em;
+      height: 1.25em;
+      mask: var(--icon) no-repeat left center / contain;
+      mask-size: 100% 100%;
+      background-color: hsl(var(--bc));
+    }
+
+    &:where(.is-active) {
+      color: hsl(var(--p));
+      border-bottom: 2px solid hsl(var(--pf));
+
+      &::before {
+        background-color: hsl(var(--p));
+      }
+    }
+  }
+
+  & :where([data-drupal-link-system-path$="/edit"]) {
+    --icon: var(--i-feather-edit);
+  }
+  & :where([data-drupal-link-system-path$="/delete"]) {
+    --icon: var(--i-feather-trash-2);
+  }
+  & :where([data-drupal-link-system-path$="/revisions"]) {
+    --icon: var(--i-feather-git-branch);
+  }
+}

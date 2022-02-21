@@ -1,0 +1,37 @@
+
+:where(.toggle) {
+  --chkbg: var(--b1);
+  --chkc: var(--bc);
+  --focus-shadow: 0 0 0;
+  --chkbs: 1.5rem;
+  --chkbw: calc(var(--chkbs) * 2);
+  --chkbh: var(--chkbs);
+  appearance: none;
+  width: var(--chkbw);
+  height: var(--chkbh);
+  border-radius: 1.5rem;
+  border: 1px solid hsla(var(--chkc) / var(--o-b, 0.2));
+  cursor: pointer;
+  background: hsla(var(--chkc) / var(--o-bg, 0.2));
+  transition-duration: 300ms;
+  transition: background, box-shadow var(--animation-input, 0.2s) ease-in-out;
+  box-shadow: calc(var(--chkbs) * -1) 0 0 2px hsl(var(--chkbg)) inset,
+    0 0 0 2px hsl(var(--chkbg)) inset, var(--focus-shadow);
+
+  &:where(:focus-visible) {
+    --focus-shadow: 0 0 0 2px hsl(var(--chkbg)), 0 0 0 4px hsl(var(--chkc));
+  }
+
+  &:where(:checked),
+  &:where([checked='true']) {
+    --o-bg: 1;
+    box-shadow: var(--chkbs) 0 0 2px hsl(var(--chkbg)) inset,
+      0 0 0 2px hsl(var(--chkbg)) inset, var(--focus-shadow);
+  }
+
+  &:where(:disabled) {
+    background-color: hsla(var(--chkc) / 0.2);
+    border-color: transparent;
+    cursor: not-allowed;
+  }
+}

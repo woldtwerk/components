@@ -1,0 +1,51 @@
+:where(.pager__items, .js-pager__items) {
+  display: flex;
+  justify-content: center;
+}
+
+:where(.pager__item, .js-pager__items li) {
+  background: hsl(var(--n));
+  color: hsl(var(--nc));
+  min-height: 3rem;
+  padding-inline: 1rem;
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration) var(--timing);
+
+  &:hover {
+    background: hsl(var(--nf));
+  }
+
+  &:where(.is-active) {
+    background: hsl(var(--p));
+  }
+
+  &:where(.pager__item--first) {
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
+  }
+
+  &:where(.pager__item--last) {
+    border-top-right-radius: var(--radius-sm);
+    border-bottom-right-radius: var(--radius-sm);
+  }
+}
+
+:where(.js-pager__items li) {
+  &:where(:first-child) {
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
+  }
+  &:where(:last-child) {
+    border-top-right-radius: var(--radius-sm);
+    border-bottom-right-radius: var(--radius-sm);
+  }
+  &:where(:empty) {
+    background: hsl(var(--p));
+  }
+}

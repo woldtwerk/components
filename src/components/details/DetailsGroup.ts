@@ -10,6 +10,10 @@ export class DetailsGroup extends HTMLElement {
       ? this.setAttribute('multiple', '')
       : this.removeAttribute('multiple')
   }
+
+  static get observedAttributes() {
+    return ['multiple'];
+  }
   
   details: Array<HTMLDetailsElement> = []
   
@@ -19,7 +23,7 @@ export class DetailsGroup extends HTMLElement {
 
   connectedCallback() {
    this.details = Array.from(this.querySelectorAll('details'))
-   !this.multiple && this.addEventListener('click', (e) => this.handleDetailsChange(e))
+   this.addEventListener('click', (e) => this.handleDetailsChange(e))
   }
 
   disconnectedCallback() {
@@ -27,6 +31,7 @@ export class DetailsGroup extends HTMLElement {
   }
 
   handleDetailsChange(e: Event) {
+    if(this.multiple) return
     const target = e.target as HTMLElement
     const triggerDetail = target.tagName === 'DETAILS' ? target : target.closest('details')
     this.details.forEach(detail => detail !== triggerDetail && detail.removeAttribute('open'))

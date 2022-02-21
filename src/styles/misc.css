@@ -1,0 +1,25 @@
+:where(.visually-hidden) {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  word-wrap: normal;
+}
+
+:where(html) {
+  /* @media(prefers-color-scheme: dark) {
+    background: rgb(26, 26, 30);
+  } */
+}
+
+:where(body) {
+  font-family: sans-serif;
+}
+
+:where(:root) {
+  --duration: 250ms;
+  --timing: ease-out;
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+}

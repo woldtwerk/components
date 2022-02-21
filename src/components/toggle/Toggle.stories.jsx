@@ -1,9 +1,10 @@
-import { computed } from 'vue';
 import Color from 'color'
+import { html } from 'lit'
+import { styleMap } from 'lit/directives/style-map.js';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Form',
+  title: 'CSS Only/Toggle',
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     color: { control: 'color' },
@@ -24,22 +25,16 @@ const hsl = (hex) => {
   return hex ? `${color.hue()} ${color.saturationl()}% ${color.lightness()}%` : ''
 }
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = (args) => ({
-  setup() {
-    return {
-      args,
-      style: computed(() => ({
-        "--chkc": hsl(args.color),
+const Template = (args) => {
+  return html`
+    <input type="checkbox" ?disabled="${args.disabled}" ?checked="${args.checked}" class="toggle" style=${styleMap({
+      "--chkc": hsl(args.color),
         "--chkbg": hsl(args.backgroundColor),
         "--chkbs": args.size || '1.5rem',
-      })),
-    }
-  },
-  template: `
-    <input type="checkbox" :disabled="args.disabled" :checked="args.checked" class="toggle" :style="style">
-  `,
-})
+    })}>
+  `
+}
+
 
 export const Toggle = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args

@@ -3,7 +3,7 @@ import './UpCounter.ts';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Up Counter',
+  title: 'Custom Elements/Up Counter',
   // component: DetailsGroup,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {

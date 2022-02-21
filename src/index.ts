@@ -1,2 +1,2 @@
 import './global.css'
-import './components/form/toggle.css'
+import './components/toggle/toggle.css'
