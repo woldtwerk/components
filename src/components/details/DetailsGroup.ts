@@ -1,4 +1,10 @@
-import './styles.css'
+import styles from './DetailsGroup.css'
+import {
+  adoptStyles,
+  html,
+  render,
+} from '../../helper'
+
 
 export class DetailsGroup extends HTMLElement {
   get multiple(): boolean {
@@ -10,20 +16,25 @@ export class DetailsGroup extends HTMLElement {
       ? this.setAttribute('multiple', '')
       : this.removeAttribute('multiple')
   }
-
-  static get observedAttributes() {
-    return ['multiple'];
-  }
   
+  shadowRoot: ShadowRoot
   details: Array<HTMLDetailsElement> = []
   
   constructor() {
     super()
+    this.shadowRoot = this.attachShadow({ mode: 'open' })
+    render(
+      html`
+        <slot></slot>
+      `,
+      this.shadowRoot
+    )
+    adoptStyles(this.shadowRoot, styles)
   }
 
   connectedCallback() {
-   this.details = Array.from(this.querySelectorAll('details'))
-   this.addEventListener('click', (e) => this.handleDetailsChange(e))
+    this.details = Array.from(this.querySelectorAll('details-item, details'))
+    this.addEventListener('click', (e) => this.handleDetailsChange(e))
   }
 
   disconnectedCallback() {
@@ -33,7 +44,7 @@ export class DetailsGroup extends HTMLElement {
   handleDetailsChange(e: Event) {
     if(this.multiple) return
     const target = e.target as HTMLElement
-    const triggerDetail = target.tagName === 'DETAILS' ? target : target.closest('details')
+    const triggerDetail = target.tagName === 'DETAILS-ITEM' ? target : target.closest('details')
     this.details.forEach(detail => detail !== triggerDetail && detail.removeAttribute('open'))
   }
 }

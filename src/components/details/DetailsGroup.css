@@ -1,0 +1,42 @@
+
+:host {
+  display: grid;
+  gap: 0.5em;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+summary {
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  background-color: hsla(var(--b2) / var(--o-bg,1));
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+
+  &::after {
+    content: '';
+    background-color: currentColor;
+    mask-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>');
+    mask-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 1em;
+    flex: 0 0 1em;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 250ms ease;
+    }
+  }
+}
+
+summary ~ * {
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+

@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './UpCounter.ts';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export

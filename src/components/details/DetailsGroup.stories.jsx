@@ -1,5 +1,6 @@
 import { html } from 'lit'
 import './DetailsGroup.ts'
+import './DetailsItem.ts'
 
 // // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -26,9 +27,31 @@ const Template = ({ multiple }) => html`
   </details-group>
 `
 
-
 export const Primary = Template.bind({})
 
 Primary.args = {
-  multiple: false
+  multiple: false,
 }
+
+export const Secondary = ({ multiple }) => html`
+  <details-group ?multiple=${multiple}>
+    <details-item part-classes='{ "summary": "abc" }' summary="This is the summary">
+      More info about the details.
+    </details-item>
+    <details-item summary="This is the summary">
+      More info about the details.
+    </details-item>
+    <details-item summary="This is the summary">
+      More info about the details.
+    </details-item>
+  </details-group>
+`
+Secondary.args = {
+  multiple: false,
+}
+
+export const DetailsItem = () => html`
+  <details-item summary="This is the summary">
+    More info about the details.
+  </details-item>
+`

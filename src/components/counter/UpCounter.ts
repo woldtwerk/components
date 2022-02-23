@@ -125,7 +125,6 @@ export class UpCounter extends HTMLElement {
    */
   getDecimals(val: number) {
     return `${val}`.split('.').length === 2
-      // @ts-expect-error
       ? `${val}`.split('.').at(-1).length
       : 0
   }
