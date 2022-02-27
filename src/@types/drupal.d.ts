@@ -3,16 +3,7 @@ declare global {
   var Drupal: Drupal
   var drupalSettings: Drupal.DrupalSettings
 
-  interface Array<T> {
-    at(index: number): any
-  }
-
-  interface ShadowRoot {
-    adoptedStyleSheets: Array<CSSStyleSheet>
-  }
-
   interface Window {
-    Alpine: any
     Drupal: Drupal
   }
 

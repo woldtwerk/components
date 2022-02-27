@@ -1,0 +1,46 @@
+import { html } from 'lit'
+import { Canvas, Meta, Story, SourceContainer } from '@storybook/addon-docs'
+import { Anchor } from '@storybook/addon-docs/blocks'
+import { styled } from '@storybook/theming'
+
+export const AlertWrapper = styled.div`
+  & div[data-drupal-messages] {
+    position: relative;
+    & > div {
+      animation: headShake 1000ms both ease-in-out;
+    }
+  }
+`
+
+<Anchor storyId='drupal-status-messages--status' />
+
+# Status Messages
+Default styling for Drupal Status Message. No markup changes required.
+
+<Canvas>
+  <AlertWrapper>
+    <Story id='drupal-status-messages--all' ></Story>
+  </AlertWrapper>
+</Canvas>
+
+
+## Status
+<Canvas>
+  <AlertWrapper>
+    <Story id='drupal-status-messages--status' ></Story>
+  </AlertWrapper>
+</Canvas>
+
+## Warning
+<Canvas>
+  <AlertWrapper>
+    <Story id='drupal-status-messages--warning' ></Story>
+  </AlertWrapper>
+</Canvas>
+
+## Error
+<Canvas>
+  <AlertWrapper>
+    <Story id='drupal-status-messages--error' ></Story>
+  </AlertWrapper>
+</Canvas>

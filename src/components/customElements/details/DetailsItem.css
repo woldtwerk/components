@@ -3,7 +3,6 @@
   padding: 0.5em 1em;
   border-radius: 0.5em;
   background-color: hsla(var(--b2) / var(--o-bg,1));
-  font-weight: 500;
   user-select: none;
   cursor: pointer;
   list-style: none;

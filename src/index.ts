@@ -1,2 +1,2 @@
-import './global.css'
-import './components/toggle/toggle.css'
+export * from './components/customElements/details/DetailsGroup'
+export * from './components/customElements/details/DetailsItem'

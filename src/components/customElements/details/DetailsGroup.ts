@@ -3,7 +3,7 @@ import {
   adoptStyles,
   html,
   render,
-} from '../../helper'
+} from '~/helper'
 
 
 export class DetailsGroup extends HTMLElement {

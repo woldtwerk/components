@@ -9,7 +9,7 @@ export default {
 }
 
 export const LocalTasks = () => html`
-  <div id="block-stark-local-tasks">
+  <div id="block-[theme-name]-local-tasks">
     <h2 class="visually-hidden">Primary tabs</h2>
     <ul>
       <li>

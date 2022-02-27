@@ -7,9 +7,12 @@ specifiers:
   '@storybook/web-components': ^6.4.19
   autoprefixer: ^10.4.2
   color: ^4.2.0
+  esbuild: ^0.14.23
+  fast-glob: ^3.2.11
   lit: ^2.2.0
   postcss: ^8.4.6
   postcss-nested: ^5.0.6
+  rimraf: ^3.0.2
   storybook-builder-vite: ^0.1.15
   typescript: ^4.5.4
   vite: ^2.8.0
@@ -21,9 +24,12 @@ devDependencies:
   '@storybook/web-components': 6.4.19_typescript@4.5.5
   autoprefixer: 10.4.2_postcss@8.4.6
   color: 4.2.1
+  esbuild: 0.14.23
+  fast-glob: 3.2.11
   lit: 2.2.0
   postcss: 8.4.6
   postcss-nested: 5.0.6_postcss@8.4.6
+  rimraf: 3.0.2
   storybook-builder-vite: 0.1.16_typescript@4.5.5+vite@2.8.4
   typescript: 4.5.5
   vite: 2.8.4

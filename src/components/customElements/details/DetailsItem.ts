@@ -1,6 +1,7 @@
 import styles from './DetailsItem.css'
 import {
   adoptStyles,
+  animations,
   html,
   render,
   waitForEvent,
@@ -8,26 +9,15 @@ import {
   stopAnimations,
   shimKeyframesHeightAuto,
   animateTo,
-} from '../../helper'
-
-const animations = {
-  show: {
-    keyframes: [
-      { height: '0', opacity: '0' },
-      { height: 'auto', opacity: '1' },
-    ],
-    options: { duration: 250, easing: 'linear' },
-  },
-  hide: {
-    keyframes: [
-      { height: 'auto', opacity: '1' },
-      { height: '0', opacity: '0' },
-    ],
-    options: { duration: 250, easing: 'linear' },
-  },
-}
+  reflectProp,
+  setBooleanAttr
+} from '~/helper'
 
 export class DetailsItem extends HTMLElement {
+  summary: string = ''
+  open: boolean = false
+  disabled: boolean = false
+
   shadowRoot: ShadowRoot
   base: HTMLElement
   header: HTMLElement
@@ -36,70 +26,28 @@ export class DetailsItem extends HTMLElement {
 
   static styles = styles
 
-  get summary(): string {
-    return (this.hasAttribute('summary') && this.getAttribute('summary')) || ''
-  }
-
-  set summary(val: string) {
-    this.setAttribute('summary', '')
-  }
-
-  get open(): boolean {
-    return this.hasAttribute('open')
-  }
-
-  set open(val: boolean) {
-    val ? this.setAttribute('open', '') : this.removeAttribute('open')
-  }
-
-  get disabled(): boolean {
-    return this.hasAttribute('disabled')
-  }
-
-  set disabled(val: boolean) {
-    val ? this.setAttribute('disabled', '') : this.removeAttribute('disabled')
-  }
-
   constructor() {
     super()
     this.shadowRoot = this.attachShadow({ mode: 'open' })
-    // this.render()
-    render(
-      html`
-        <div part="base" ${this.open ? 'open' : ''}>
-          <header
-            aria-controls="content"
-            aria-expanded=${this.open ? 'true' : 'false'}
-            part="summary"
-            tabindex="-1"
-            role="button"
-          >
-            ${this.summary}
-          </header>
-          <div part="body">
-            <div part="content">
-              <slot></slot>
-            </div>
-          </div>
-        </div>
-      `,
-      this.shadowRoot
-    )
-
     adoptStyles(this.shadowRoot, styles)
 
+    reflectProp(this, 'summary')
+    reflectProp(this, 'open')
+    reflectProp(this, 'disabled')
+    
+    this.render()
     this.base = this.shadowRoot.querySelector('[part=base]')!
     this.header = this.shadowRoot.querySelector('[part=summary]')!
     this.body = this.shadowRoot.querySelector('[part=body]')!
     this.content = this.shadowRoot.querySelector('[part=content]')!
 
     this.header.addEventListener('click', (e) => this.handleClick(e))
+    this.header.addEventListener('keyup', (e) => this.handleKeyDown(e))
   }
-
-  connectedCallback() {}
 
   disconnectedCallback() {
     this.header.removeEventListener('click', this.handleClick)
+    this.header.removeEventListener('keydown', this.handleKeyDown)
   }
 
   static get observedAttributes() {
@@ -112,10 +60,59 @@ export class DetailsItem extends HTMLElement {
     }
   }
 
+  render() {
+    const template = html`
+      <div part="base" ${this.open ? 'open' : ''}>
+        <header
+          aria-controls="content"
+          aria-expanded=${this.open ? 'true' : 'false'}
+          part="summary"
+          tabindex="0"
+          role="button"
+        >
+          ${this.summary}
+        </header>
+        <div part="body">
+          <div part="content">
+            <slot></slot>
+          </div>
+        </div>
+      </div>
+    `
+    render(template, this.shadowRoot)
+  }
+
+  update() {
+    setBooleanAttr(this.base, 'open', this.open)
+    setBooleanAttr(this.header, 'aria-expanded', this.open)
+  }
+
   handleClick(e: MouseEvent) {
     if (this.disabled) return
     this.open ? this.hide() : this.show()
     this.header.focus()
+  }
+
+  handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+
+      if (this.open) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      this.hide();
+    }
+
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      this.show();
+    }
   }
 
   async show() {
@@ -138,8 +135,7 @@ export class DetailsItem extends HTMLElement {
       await stopAnimations(this.body)
 
       this.body.hidden = false
-      this.base.setAttribute('open', '')
-      this.header.setAttribute('aria-expanded', '')
+      this.update()
 
       const { keyframes, options } = animations.show
       await animateTo(
@@ -156,8 +152,7 @@ export class DetailsItem extends HTMLElement {
 
       await stopAnimations(this.body)
 
-      this.base.removeAttribute('open')
-      this.header.removeAttribute('aria-expanded')
+      this.update()
 
       const { keyframes, options } = animations.hide
       await animateTo(
@@ -170,26 +165,6 @@ export class DetailsItem extends HTMLElement {
 
       emit(this, 'details-after-hide')
     }
-  }
-
-  render() {
-    // this.shadowRoot.appendChild(Object.assign(document.createElement('style'), {
-    //   textContent: DetailsItem.styles,
-    // }))
-    // this.base = Object.assign(document.createElement('div'), {
-    //   part: 'base',
-    // })
-    // this.header = Object.assign(document.createElement('header'), {
-    //   part: 'summary',
-    //   textContent: this.summary
-    // })
-    // this.base.appendChild(this.header)
-    // this.content = Object.assign(document.createElement('div'), {
-    //   part: 'content',
-    // })
-    // this.base.appendChild(this.content)
-    // this.content.appendChild(document.createElement('slot'))
-    // this.shadowRoot.appendChild(this.base)
   }
 }
 

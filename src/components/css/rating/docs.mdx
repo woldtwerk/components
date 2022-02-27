@@ -1,0 +1,64 @@
+import { html } from 'lit'
+import { styleMap } from 'lit/directives/style-map.js'
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { Anchor } from '@storybook/addon-docs/blocks'
+import './rating.css'
+
+<Anchor storyId='css-only-rating--rating' />
+
+# Rating
+Ratings give users a way to quickly view and provide feedback.
+
+<Canvas mdxSource='<input type="range" min="1" value="3" class="rating" max="5" step="1">'>
+  <Story id='css-only-rating--rating'></Story>
+</Canvas>
+
+## Examples
+
+### Maximum Value
+To change the maximum possible value, use the <code>max</code> attribute.
+
+### Steps
+Use the <code>steps</code> attribute to let users select fractional ratings. Not recommended for input.
+
+### Disabled
+Use the <code>disabled</code> attribute to disable the toggle.
+
+### Custom Size
+Use the available custom properties to make the switch a different size.
+
+
+### Importing
+
+#### CSS
+<code>@import url(ue/components/rating.css);</code>
+
+#### JS
+<code>import @ue/components/rating.css</code>
+
+### CSS Custom Properties
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Description</th>
+    </tr>
+  </thead>
+<tbody>
+  <tr>
+    <td><code>--size</code></td><td>The size of the toggle.</td>
+  </tr>
+  <tr>
+    <td><code>--active</code></td><td>The active color of the rating.</td>
+  </tr>
+  <tr>
+    <td><code>--inactive</code></td><td>The inactive color of the rating.</td>
+  </tr>
+  <tr>
+    <td><code>--icon</code></td><td>The icon of the rating.</td>
+  </tr>
+</tbody>
+</table>
+
+## A11y tips
+
+Add the <a href="https://www.w3.org/TR/wai-aria-1.1/#switch"><code>role="switch"</code></a> to your input Element.

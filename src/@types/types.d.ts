@@ -4,6 +4,10 @@ declare global {
     replaceSync: Function
     __hmrId: string
   }
+
+  interface Array<T> {
+    at(index: number): any
+  }
   
   interface ShadowRoot {
     adoptedStyleSheets: Array<CSSStyleSheet>

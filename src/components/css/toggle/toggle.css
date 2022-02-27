@@ -32,6 +32,9 @@
   &:where(:disabled) {
     background-color: hsla(var(--chkc) / 0.2);
     border-color: transparent;
+  }
+  
+  &:disabled {
     cursor: not-allowed;
   }
 }

@@ -1,0 +1,68 @@
+import Color from 'color'
+import { html } from 'lit'
+import { styleMap } from 'lit/directives/style-map.js'
+import { Canvas, Meta, Story, SourceContainer } from '@storybook/addon-docs';
+import { Anchor } from '@storybook/addon-docs/blocks';
+import './toggle.css'
+
+<Anchor storyId='css-only-toggle--default' />
+
+# Toggle
+A toggle allows the user to switch an option on or off.
+
+<Canvas mdxSource='<input type="checkbox" class="toggle">'>
+  <Story id='css-only-toggle--default'></Story>
+</Canvas>
+
+## Examples
+
+### Checked
+Use the <code>checked</code> attribute to activate the toggle.
+<Canvas mdxSource='<input type="checkbox" class="toggle" checked>'>
+  <Story id='css-only-toggle--checked'></Story>
+</Canvas>
+
+### Disabled
+Use the <code>disabled</code> attribute to disable the toggle.
+<Canvas mdxSource='<input type="checkbox" class="toggle" disabled>'>
+  <Story id='css-only-toggle--disabled'></Story>
+</Canvas>
+
+### Custom Size
+Use the available custom properties to make the switch a different size.
+<Canvas mdxSource='<input type="checkbox" class="toggle" style="--chkbs:2rem;">'>
+  <Story id='css-only-toggle--custom-size'></Story>
+</Canvas>
+
+
+### Importing
+
+#### CSS
+<code>@import url(ue/components/toggle.css);</code>
+
+#### JS
+<code>import @ue/components/toggle.css</code>
+
+### CSS Custom Properties
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Description</th>
+    </tr>
+  </thead>
+<tbody>
+  <tr>
+    <td><code>--chkbs</code></td><td>The size of the toggle.</td>
+  </tr>
+  <tr>
+    <td><code>--chkbg</code></td><td>The Background Color of the toggle.</td>
+  </tr>
+  <tr>
+    <td><code>--chkc</code></td><td>The Color of the thumb.</td>
+  </tr>
+</tbody>
+</table>
+
+## A11y tips
+
+Add the <a href="https://www.w3.org/TR/wai-aria-1.1/#switch"><code>role="switch"</code></a> to your input Element.

@@ -1,13 +1,19 @@
 import { html } from 'lit'
 import './DetailsGroup.ts'
 import './DetailsItem.ts'
+import Docs from './docs.mdx'
 
 // // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Custom Elements/Details Group',
+  title: 'Custom Elements/Details',
   // component: DetailsGroup,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {},
+  parameters: {
+    docs: {
+      page: Docs,
+    },
+  },
 }
 
 const Template = ({ multiple }) => html`
@@ -27,18 +33,22 @@ const Template = ({ multiple }) => html`
   </details-group>
 `
 
-export const Primary = Template.bind({})
-
-Primary.args = {
+export const DetailsGroup = Template.bind({})
+DetailsGroup.args = {
   multiple: false,
 }
 
-export const Secondary = ({ multiple }) => html`
+export const DetailsItemGroup = ({ multiple }) => html`
   <details-group ?multiple=${multiple}>
     <details-item part-classes='{ "summary": "abc" }' summary="This is the summary">
       More info about the details.
     </details-item>
     <details-item summary="This is the summary">
+      More info about the details.
+      More info about the details.
+      More info about the details.
+      More info about the details.
+      More info about the details.
       More info about the details.
     </details-item>
     <details-item summary="This is the summary">
@@ -46,7 +56,7 @@ export const Secondary = ({ multiple }) => html`
     </details-item>
   </details-group>
 `
-Secondary.args = {
+DetailsItemGroup.args = {
   multiple: false,
 }
 

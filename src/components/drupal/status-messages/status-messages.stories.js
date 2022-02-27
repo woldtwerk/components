@@ -1,4 +1,5 @@
 import { html } from 'lit'
+import Docs from './docs.mdx'
 import './status-messages.css'
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
@@ -7,6 +8,11 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {},
   decorators: [(story) => html`<div data-drupal-messages="">${story()}</div>`],
+  parameters: {
+    docs: {
+      page: Docs,
+    },
+  },
 }
 
 export const Status = () => html`

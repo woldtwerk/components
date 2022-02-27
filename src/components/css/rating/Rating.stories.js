@@ -1,4 +1,6 @@
 import { html } from 'lit'
+import { styleMap } from 'lit/directives/style-map.js'
+import Docs from './docs.mdx';
 import './rating.css'
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
@@ -16,16 +18,25 @@ export default {
       },
     },
   },
+  parameters: {
+    docs: {
+      page: Docs,
+    },
+  },
 }
 
 const Template = (args) => html`
   <input
     type="range"
     ?disabled=${args.disabled}
-    min="1"
+    min=1
     max=${args.max}
     step=${args.step}
+    value=3
     class="rating"
+    style=${styleMap({
+      '--size': args.size || '1.5rem',
+    })}
   />
 `
 
